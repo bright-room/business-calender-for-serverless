@@ -4,10 +4,10 @@
     "artifacts": "bin/index.js"
   },
   "scripts": {
-    "bootstrap": "cdklocal bootstrap",
-    "synth": "cdklocal synth",
-    "diff": "cdklocal diff",
-    "deploy": "cdklocal deploy"
+    "bootstrap": "cdk bootstrap",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

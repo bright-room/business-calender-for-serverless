@@ -1,0 +1,22 @@
+services:
+  localstack:
+    image: "localstack/localstack-pro"
+    container_name: "localstack"
+    hostname: "localstack"
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+      - "127.0.0.1:443:443"
+    environment:
+      LOCALSTACK_AUTH_TOKEN: "${LOCALSTACK_AUTH_TOKEN:?}"
+      HOSTNAME_EXTERNAL: "localhost.localstack.cloud"
+      DEFAULT_REGION: "ap-northeast-1"
+      DEBUG: "${DEBUG:-0}"
+      PERSISTENCE: "${PERSISTENCE:-0}"
+      ENFORCE_IAM: "${ENFORCE_IAM:-0}"
+    volumes:
+      - "localstack-storage:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  localstack-storage:
