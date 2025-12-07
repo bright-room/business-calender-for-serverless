@@ -16,9 +16,8 @@ runs:
 
     - uses: "actions/setup-node@v6"
       with:
-        node-version-file: "package.json"
+        node-version-file: "{{ inputs.working-directory }}/package.json"
         cache: "pnpm"
-      working-directory: "{{ inputs.working-directory }}"
 
     - shell: "bash"
       run: "pnpm i --frozen-lockfile"
