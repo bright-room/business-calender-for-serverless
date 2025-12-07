@@ -1,0 +1,20 @@
+{
+  "name": "infrastructure",
+  "scripts": {
+    "lint": "biome lint --write .",
+    "fmt": "biome format --write .",
+    "check": "biome check --write .",
+    "ci": "biome ci .",
+    "test": "exit 0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.8"
+  },
+  "engines": {
+    "node": "24.11.1",
+    "npm": "please_use_pnpm_instead",
+    "yarn": "please_use_pnpm_instead",
+    "pnpm": "10.24.0"
+  },
+  "packageManager": "pnpm@10.24.0"
+}

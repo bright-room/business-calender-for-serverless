@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["**", "!**/cdk.out/**/*"],
+    "ignoreUnknown": true
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "includes": ["**"],
+    "indentWidth": 2,
+    "indentStyle": "space",
+    "lineWidth": 120,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "always",
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 120,
+      "bracketSpacing": true
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "json": {
+    "parser": {
+      "allowTrailingCommas": true,
+      "allowComments": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "lineWidth": 120,
+      "trailingCommas": "none"
+    },
+    "linter": {
+      "enabled": true
+    }
+  }
+}

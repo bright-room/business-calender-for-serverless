@@ -1,0 +1,25 @@
+---
+name: "Setup node.js"
+description: "Setup node.js"
+
+inputs:
+  working-directory:
+    required: true
+    description: "Working directory"
+
+runs:
+  using: "composite"
+  steps:
+    - shell: "bash"
+      run: "corepack enable"
+      working-directory: "${{ inputs.working-directory }}"
+
+    - uses: "actions/setup-node@v6"
+      with:
+        node-version-file: "${{ inputs.working-directory }}/package.json"
+        cache-dependency-path: "${{ inputs.working-directory }}/pnpm-lock.yaml"
+        cache: "pnpm"
+
+    - shell: "bash"
+      run: "pnpm i --frozen-lockfile"
+      working-directory: "${{ inputs.working-directory }}"

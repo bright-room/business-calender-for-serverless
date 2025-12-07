@@ -1,0 +1,28 @@
+{
+  "name": "aws-infra",
+  "bin": {
+    "artifacts": "bin/index.js"
+  },
+  "scripts": {
+    "bootstrap": "cdk bootstrap",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "@aws/pdk": "0.26.15",
+    "@types/node": "24.10.1",
+    "@tsconfig/node-lts": "24.0.0",
+    "aws-cdk": "2.1033.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.232.1",
+    "constructs": "10.4.3",
+    "source-map-support": "0.5.21"
+  }
+}
