@@ -17,6 +17,7 @@ runs:
     - uses: "actions/setup-node@v6"
       with:
         node-version-file: "${{ inputs.working-directory }}/package.json"
+        cache-dependency-path: "${{ inputs.working-directory }}/pnpm-lock.yaml"
         cache: "pnpm"
 
     - shell: "bash"
