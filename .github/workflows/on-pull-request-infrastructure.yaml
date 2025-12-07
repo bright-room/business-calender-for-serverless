@@ -1,5 +1,5 @@
 ---
-name: "on-pull-request"
+name: "on-pull-request-infrastructure"
 
 on:
   pull_request:
