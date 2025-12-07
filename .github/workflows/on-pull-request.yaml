@@ -1,0 +1,61 @@
+---
+name: "on-pull-request"
+
+on:
+  pull_request:
+
+jobs:
+  scan-vulnerability:
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 3
+
+    steps:
+      - name: "Checkout Repository"
+        uses: "actions/checkout@v6"
+
+      - name: "Setup node.js"
+        uses: "./.github/actions/setup-node"
+        with:
+          working-directory: "./infrastructure"
+
+      - name: "Check audit"
+        run: "pnpm audit --audit-level high"
+        working-directory: "./infrastructure"
+
+  check-code-style:
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 5
+    needs:
+      - "scan-vulnerability"
+
+    steps:
+      - name: "Checkout Repository"
+        uses: "actions/checkout@v6"
+
+      - name: "Setup node.js"
+        uses: "./.github/actions/setup-node"
+        with:
+          working-directory: "./infrastructure"
+
+      - name: "Check code-style"
+        run: "pnpm run ci ."
+        working-directory: "./infrastructure"
+
+  test:
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 5
+    needs:
+      - "scan-vulnerability"
+
+    steps:
+      - name: "Checkout Repository"
+        uses: "actions/checkout@v6"
+
+      - name: "Setup node.js"
+        uses: "./.github/actions/setup-node"
+        with:
+          working-directory: "./infrastructure"
+
+      - name: "Run test"
+        run: "pnpm test"
+        working-directory: "./infrastructure"
