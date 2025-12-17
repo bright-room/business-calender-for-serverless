@@ -1,10 +1,10 @@
 import { CdkGraph, FilterPreset, Filters } from "@aws/pdk/cdk-graph"
 import { CdkGraphDiagramPlugin, DiagramFormat } from "@aws/pdk/cdk-graph-plugin-diagram"
 import { CdkGraphThreatComposerPlugin } from "@aws/pdk/cdk-graph-plugin-threat-composer"
-import { AwsPrototypingChecks, PDKNag, type PDKNagApp } from "@aws/pdk/pdk-nag"
+import { PDKNag, type PDKNagApp } from "@aws/pdk/pdk-nag"
 
 export const GraphGenerateSupport = async (contextName: string, block: (app: PDKNagApp) => void) => {
-  const app = PDKNag.app({ nagPacks: [new AwsPrototypingChecks()] })
+  const app = PDKNag.app()
 
   block(app)
 

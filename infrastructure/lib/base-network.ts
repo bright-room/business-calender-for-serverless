@@ -1,4 +1,4 @@
-import { aws_ec2 as ec2 } from "aws-cdk-lib"
+import { aws_ec2 as ec2, aws_logs as logs } from "aws-cdk-lib"
 import { Construct } from "constructs"
 import type { BaseNetworkProperties } from "./properties/base-network"
 
@@ -43,6 +43,15 @@ export class CreateBaseNetwork extends Construct {
           cidrMask: 24,
         },
       ],
+    })
+
+    // VPC Flow Logs
+    vpc.addFlowLog("FlowLog", {
+      destination: ec2.FlowLogDestination.toCloudWatchLogs(
+        new logs.LogGroup(this, "VpcFlowLogGroup", {
+          retention: logs.RetentionDays.ONE_YEAR,
+        })
+      ),
     })
 
     const gatewaySubnets = vpc.selectSubnets({ subnetGroupName: "Gateway" })
