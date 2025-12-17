@@ -61,5 +61,4 @@ cdk/local/deploy:
 	cd infrastructure && \
 	AWS_ENDPOINT_URL=http://localhost:4566 \
 	AWS_ENDPOINT_URL_S3=http://s3.localhost.localstack.cloud:4566 \
-
 	pnpm cdk --profile local deploy -c env=local --all

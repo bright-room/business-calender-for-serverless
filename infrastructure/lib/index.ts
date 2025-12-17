@@ -9,6 +9,7 @@ import type { S3Properties } from "./properties/s3"
 import { CreateRds } from "./rds"
 import { CreateS3Bucket } from "./s3"
 import { CreateSecurityGroup } from "./sg"
+import { _suppressions } from "./utils/nag-suppressions"
 
 export interface BusinessCalenderStackProps extends cdk.StackProps {
   contextProperties: ContextProperties
@@ -20,6 +21,7 @@ export interface BusinessCalenderStackProps extends cdk.StackProps {
 export class BusinessCalenderStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: BusinessCalenderStackProps) {
     super(scope, id, props)
+    _suppressions(this)
 
     const { baseNetworks } = new CreateBaseNetwork(this, "BaseNetwork", {
       properties: props.baseNetworkProperties,

@@ -5,6 +5,7 @@ import {
   aws_rds as rds,
   aws_secretsmanager as secretsmanager,
 } from "aws-cdk-lib"
+import { NagSuppressions } from "cdk-nag"
 import { Construct } from "constructs"
 import { AccountName } from "./context/account"
 import type { ContextProperties } from "./properties"
@@ -47,6 +48,18 @@ export class CreateRds extends Construct {
         secretStringTemplate: '{"username": "bradmin"}',
       },
     })
+
+    // あまり環境差異的なものを作りたくないが、localstack上でRDSのローテーション設定を行おうとすると、
+    // ローテーションを担う部分がus-east-1にデプロイしようとしてしまい構築できなかったため、localの時だけ除外
+    if (props.context.account.name === AccountName.local) {
+      NagSuppressions.addResourceSuppressions(rdsCredentials, [
+        {
+          id: "AwsSolutions-SMG4",
+          reason:
+            "Secret rotation is configured on the RDS cluster itself via addRotationSingleUser, not directly on the secret",
+        },
+      ])
+    }
 
     let clusterBackups: rds.BackupProps | undefined
     if (props.properties.cluster.backup.enabled) {
@@ -95,9 +108,11 @@ export class CreateRds extends Construct {
       cloudwatchLogsExports: ["postgresql"],
       cloudwatchLogsRetention: logs.RetentionDays.ONE_YEAR,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
+      deletionProtection: true,
     })
 
-    // あまり環境差異的なものを作りたくないが、localstack上だと構築できなかったため、localの時だけ除外
+    // あまり環境差異的なものを作りたくないが、localstack上でRDSのローテーション設定を行おうとすると、
+    // ローテーションを担う部分がus-east-1にデプロイしようとしてしまい構築できなかったため、localの時だけ除外
     if (props.context.account.name !== AccountName.local) {
       cluster.addRotationSingleUser({
         excludeCharacters: EXCLUDE_CHARACTERS,
