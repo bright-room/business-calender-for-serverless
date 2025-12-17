@@ -4,7 +4,7 @@ import { CdkGraphThreatComposerPlugin } from "@aws/pdk/cdk-graph-plugin-threat-c
 import { AwsPrototypingChecks, PDKNag, type PDKNagApp } from "@aws/pdk/pdk-nag"
 
 export const GraphGenerateSupport = async (contextName: string, block: (app: PDKNagApp) => void) => {
-  const app = PDKNag.app({ nagPacks: [new AwsPrototypingChecks()] })
+  const app = PDKNag.app()
 
   block(app)
 

@@ -7,12 +7,6 @@ settings:
 importers:
 
   .:
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 2.3.8
-        version: 2.3.8
-
-  cdk/aws-infra:
     dependencies:
       aws-cdk-lib:
         specifier: 2.232.1
@@ -27,6 +21,9 @@ importers:
       '@aws/pdk':
         specifier: 0.26.15
         version: 0.26.15(@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.232.1(constructs@10.4.3))(constructs@10.4.3))(aws-cdk-lib@2.232.1(constructs@10.4.3))(cdk-nag@2.37.55(aws-cdk-lib@2.232.1(constructs@10.4.3))(constructs@10.4.3))(constructs@10.4.3)(projen@0.82.8(constructs@10.4.3))
+      '@biomejs/biome':
+        specifier: 2.3.8
+        version: 2.3.8
       '@tsconfig/node-lts':
         specifier: 24.0.0
         version: 24.0.0
