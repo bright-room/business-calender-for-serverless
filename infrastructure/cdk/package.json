@@ -8,10 +8,10 @@
     "synth": " synth",
     "diff": " diff",
     "deploy": " deploy",
-    "lint": "biome lint --write --unsafe ..",
-    "fmt": "biome format --write ..",
-    "check": "biome check --write ..",
-    "ci": "biome ci ..",
+    "lint": "biome lint --write --unsafe .",
+    "fmt": "biome format --write .",
+    "check": "biome check --write .",
+    "ci": "biome ci .",
     "test": "exit 0"
   },
   "devDependencies": {
