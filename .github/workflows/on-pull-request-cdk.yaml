@@ -1,5 +1,5 @@
 ---
-name: "on-pull-request-infrastructure"
+name: "on-pull-request-cdk"
 
 on:
   pull_request:
@@ -16,11 +16,11 @@ jobs:
       - name: "Setup node.js"
         uses: "./.github/actions/setup-node"
         with:
-          working-directory: "./infrastructure"
+          working-directory: "./infrastructure/cdk"
 
       - name: "Check audit"
         run: "pnpm audit --audit-level high"
-        working-directory: "./infrastructure"
+        working-directory: "./infrastructure/cdk"
 
   check-code-style:
     runs-on: "ubuntu-latest"
@@ -35,11 +35,11 @@ jobs:
       - name: "Setup node.js"
         uses: "./.github/actions/setup-node"
         with:
-          working-directory: "./infrastructure"
+          working-directory: "./infrastructure/cdk"
 
       - name: "Check code-style"
         run: "pnpm run ci ."
-        working-directory: "./infrastructure"
+        working-directory: "./infrastructure/cdk"
 
   test:
     runs-on: "ubuntu-latest"
@@ -54,8 +54,8 @@ jobs:
       - name: "Setup node.js"
         uses: "./.github/actions/setup-node"
         with:
-          working-directory: "./infrastructure"
+          working-directory: "./infrastructure/cdk"
 
       - name: "Run test"
         run: "pnpm test"
-        working-directory: "./infrastructure"
+        working-directory: "./infrastructure/cdk"

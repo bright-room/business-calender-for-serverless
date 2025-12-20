@@ -1,13 +1,13 @@
 {
-  "name": "infrastructure",
+  "name": "cdk",
   "bin": {
     "artifacts": "bin/index.js"
   },
   "scripts": {
-    "bootstrap": "cdk bootstrap",
-    "synth": "cdk synth",
-    "diff": "cdk diff",
-    "deploy": "cdk deploy",
+    "bootstrap": " bootstrap",
+    "synth": " synth",
+    "diff": " diff",
+    "deploy": " deploy",
     "lint": "biome lint --write --unsafe .",
     "fmt": "biome format --write .",
     "check": "biome check --write .",
