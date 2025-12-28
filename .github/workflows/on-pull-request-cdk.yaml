@@ -3,8 +3,6 @@ name: "on-pull-request-cdk"
 
 on:
   pull_request:
-    paths:
-      - "infrastructure/**"
 
 jobs:
   ts-scan-vulnerability:

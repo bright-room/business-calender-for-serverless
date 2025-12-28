@@ -2,8 +2,6 @@ name: "on-pull-request"
 
 on:
   pull_request:
-    paths:
-      - "application/**"
 
 jobs:
   go-check-code-style:
