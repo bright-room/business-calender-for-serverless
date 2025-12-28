@@ -4,37 +4,9 @@ on:
   pull_request:
     paths:
       - "application/**"
-      - "compose.yaml"
 
 jobs:
-  fmt:
-    runs-on: "ubuntu-latest"
-
-    steps:
-      - name: "Checkout repository"
-        uses: "actions/checkout@v5"
-
-      - name: "Setup go"
-        uses: "actions/setup-go@v6"
-        with:
-          go-version: "1.25.4"
-
-      - name: "Install golangci-lint"
-        run: "go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest"
-
-      - name: "Run golangci-lint fmt"
-        id: "fmt-diff"
-        continue-on-error: true
-        working-directory: "./backend"
-        run: "golangci-lint fmt --diff ./..."
-
-      - name: "Check if format failed"
-        if: "steps.fmt-diff.outcome == 'failure'"
-        run: |
-          echo "golangci-lint fmt: ${{ steps.ut-result.outcome }}"
-          exit 1
-
-  lint:
+  go-check-code-style:
     runs-on: "ubuntu-latest"
 
     steps:
@@ -49,12 +21,12 @@ jobs:
       - name: "Check lint"
         uses: "golangci/golangci-lint-action@v8"
         with:
-          working-directory: "./backend"
+          working-directory: "./application"
           version: "latest"
           skip-cache: true
           args: "--timeout 2m"
 
-  test:
+  go-test:
     runs-on: "ubuntu-latest"
 
     steps:
@@ -67,7 +39,7 @@ jobs:
           go-version: "1.25.4"
 
       - name: "Run go mod tidy"
-        working-directory: "./backend"
+        working-directory: "./application"
         run: "go mod tidy"
 
       - name: "Install gotestsum"
@@ -76,7 +48,7 @@ jobs:
       - name: "Run unit tests"
         id: "ut-result"
         continue-on-error: true
-        working-directory: "./backend"
+        working-directory: "./application"
         run: "gotestsum --junitfile report.xml --format testname -- -cover -coverprofile=coverage.out -short ./..."
 
       - name: "Check if tests failed"

@@ -3,9 +3,11 @@ name: "on-pull-request-cdk"
 
 on:
   pull_request:
+    paths:
+      - "infrastructure/**"
 
 jobs:
-  scan-vulnerability:
+  ts-scan-vulnerability:
     runs-on: "ubuntu-latest"
     timeout-minutes: 3
 
@@ -22,11 +24,11 @@ jobs:
         run: "pnpm audit --audit-level high"
         working-directory: "./infrastructure/cdk"
 
-  check-code-style:
+  ts-check-code-style:
     runs-on: "ubuntu-latest"
     timeout-minutes: 5
     needs:
-      - "scan-vulnerability"
+      - "ts-scan-vulnerability"
 
     steps:
       - name: "Checkout Repository"
@@ -41,11 +43,11 @@ jobs:
         run: "pnpm run ci ."
         working-directory: "./infrastructure/cdk"
 
-  test:
+  ts-test:
     runs-on: "ubuntu-latest"
     timeout-minutes: 5
     needs:
-      - "scan-vulnerability"
+      - "ts-scan-vulnerability"
 
     steps:
       - name: "Checkout Repository"
