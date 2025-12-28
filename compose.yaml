@@ -1,4 +1,16 @@
 services:
+  dev:
+    build:
+      context: "application/tools/docker/dev"
+    env_file:
+      - "application/.env"
+    volumes:
+      - "./application:/workspace"
+      - "go-data:/go:delegated"
+    restart: "unless-stopped"
+    tty: true
+    stdin_open: true
+
   localstack:
     image: "localstack/localstack-pro"
     container_name: "localstack"
@@ -20,3 +32,4 @@ services:
 
 volumes:
   localstack-storage:
+  go-data:
